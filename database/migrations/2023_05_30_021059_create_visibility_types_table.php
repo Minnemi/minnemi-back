@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('visibility_types', function (Blueprint $table) {
             $table->id();
-            $table->string('nickname', 45);
-            $table->string('first_name', 45);
-            $table->string('last_name', 45);
-            $table->string('profile_picture')->default('default.png');
+            $table->string('type', 10)->nullable(false);
             $table->timestamps();
         });
     }
@@ -26,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('visibility_types');
     }
 };
