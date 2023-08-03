@@ -1,49 +1,52 @@
-# Imagem base
+# Use PHP 8.1 with Apache as the base image
 FROM php:8.1-apache
 
-# Atualiza repositórios, instala dependências e limpa pacotes baixados
+# Update repositories, install dependencies, and clean downloaded packages
 RUN apt-get update \
     && apt-get -y install curl git zip zlib1g-dev libzip-dev \
     && apt-get clean
 
-# Instala extensões PHP necessárias
+# Install necessary PHP extensions
 RUN docker-php-ext-install mysqli pdo_mysql zip
 
-# Copia os arquivos do aplicativo
+# Copy the application files into the container
 COPY . /var/www/html
 
-# Copia o composer.json e o composer.lock para o diretório /var/www/html no contêiner
+# Copy composer.json and composer.lock to the /var/www/html directory in the container
 COPY composer.json composer.lock /var/www/html/
 
-# Define o diretório de trabalho como /var/www/html
+# Set the working directory to /var/www/html
 WORKDIR /var/www/html
 
-# Instala as dependências do Composer
+# Install Composer dependencies
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN composer install --optimize-autoloader --no-scripts
 
-# Variável de ambiente para o diretório raiz do Apache
+# Set the environment variable for the Apache document root
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
 
-# Atualiza configurações do Apache para usar o diretório raiz especificado
+# Update Apache configuration to use the specified document root
 RUN sed -i "s!/var/www/html!${APACHE_DOCUMENT_ROOT}!g" /etc/apache2/sites-available/000-default.conf
 RUN sed -i "s!/var/www/html!${APACHE_DOCUMENT_ROOT}!g" /etc/apache2/sites-available/default-ssl.conf
 
-# Volume para armazenar logs fora do contêiner
+# Volume to store logs outside the container
 VOLUME ["/var/www/html/storage/logs"]
 
-# Executa os comandos Artisan e ajustes de permissões
+# Execute Artisan commands and adjust permissions
 RUN php artisan cache:clear && \
     php artisan config:cache && \
     php artisan route:cache && \
-    php artisan key:generate
+    php artisan key:generate && \
+    php artisan jwt:secret && \
+    php artisan schedule:work
 
-# Define permissões de escrita para o diretório de armazenamento
+# Set write permissions for the storage directory
 RUN chmod -R 777 storage
 RUN chown -R www-data:www-data storage
 
-# Habilita o módulo rewrite do Apache
+# Enable the Apache rewrite module
 RUN a2enmod rewrite
 
-# Expõe a porta 80
+# Expose port 80 to allow external access to the web server
 EXPOSE 80
+
