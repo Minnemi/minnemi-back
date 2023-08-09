@@ -41,10 +41,10 @@ jobs:
     - name: portainer
       uses: LGinC/portainer-stack-deploy@master
       with:
-        serverurl: http://xxxxx:9000
+        serverurl: http://89.116.214.202:9000
         access_token:  ${{ secrets.PORTAINER_AK }}
         endpointId: 2
-        stackname: xxxservice
+        stackname: back
         imagenames: |
             xxx/xxx
             myhub.com/xx1/xxx
@@ -54,28 +54,28 @@ jobs:
         repo_username:  ${{ secrets.REPO_USERNAME }}
         repo_password:  ${{ secrets.REPO_PASSWORD }}
 
-    -
-      name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
-      
-    -
-      name: Docker meta
-      id: meta
-      uses: docker/metadata-action@v4
-      with:
-        images: m1nnemi/back
-    -
-      name: Login to Docker Hub
-      uses: docker/login-action@v2
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
-        
-    -
-      name: Build and push
-      uses: docker/build-push-action@v4
-      with:
-        context: .
-        file: ./Dockerfile
-        push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/back:latest
+#    -
+#      name: Set up Docker Buildx
+#      uses: docker/setup-buildx-action@v2
+#      
+#    -
+#      name: Docker meta
+#      id: meta
+#      uses: docker/metadata-action@v4
+#      with:
+#        images: m1nnemi/back
+#    -
+#      name: Login to Docker Hub
+#      uses: docker/login-action@v2
+#      with:
+#        username: ${{ secrets.DOCKERHUB_USERNAME }}
+#        password: ${{ secrets.DOCKERHUB_TOKEN }}
+#        
+#    -
+#      name: Build and push
+#      uses: docker/build-push-action@v4
+#      with:
+#        context: .
+#        file: ./Dockerfile
+#        push: true
+#        tags: ${{ secrets.DOCKERHUB_USERNAME }}/back:latest
