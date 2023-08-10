@@ -40,7 +40,7 @@ jobs:
     - name: Deploy Stack
       uses: kgierke/portainer-stack-deployment@v1
       with:
-        portainer-url: "http://89.116.214.202:9000"
+        portainer-url: "89.116.214.202:9000"
         portainer-username: ${{ secrets.REPO_USERNAME }}
         portainer-password: ${{ secrets.REPO_PASSWORD }}
         portainer-endpoint: 2
