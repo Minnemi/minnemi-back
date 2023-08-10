@@ -37,23 +37,17 @@ jobs:
         DB_DATABASE: database/database.sqlite
       run: php artisan test
 
-
-    - name: portainer
-      uses: LGinC/portainer-stack-deploy@master
+    - name: Deploy Stack
+      uses: kgierke/portainer-stack-deployment@v1
       with:
-        serverurl: http://89.116.214.202:9000
-        access_token:  ${{ secrets.PORTAINER_AK }}
-        endpointId: 2
-        stackname: back
-        imagenames: |
-            xxx/xxx
-            myhub.com/xx1/xxx
-        env: |
-            myTag:App
-        docker_compose_path: deploy/docker-compose.yaml
-        repo_username:  ${{ secrets.REPO_USERNAME }}
-        repo_password:  ${{ secrets.REPO_PASSWORD }}
-
+        portainer-url: "http://89.116.214.202:9000"
+        portainer-username: ${{ secrets.REPO_USERNAME }}
+        portainer-password: ${{ secrets.REPO_PASSWORD }}
+        portainer-endpoint: 2
+        name: stack-name
+        file: ./docker-compose.yml
+        variables: '{"image": "hello-world"}'
+        
 #    -
 #      name: Set up Docker Buildx
 #      uses: docker/setup-buildx-action@v2
