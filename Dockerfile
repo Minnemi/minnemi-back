@@ -1,3 +1,4 @@
+# Imagem base
 FROM php:8.1-apache
 
 # Atualiza repositórios, instala dependências e limpa pacotes baixados
@@ -38,7 +39,6 @@ RUN php artisan cache:clear && \
     php artisan key:generate
 
 # Define permissões de escrita para o diretório de armazenamento
-
 RUN chmod -R 777 storage
 RUN chown -R www-data:www-data storage
 
