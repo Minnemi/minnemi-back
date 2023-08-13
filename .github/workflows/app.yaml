@@ -8,7 +8,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu:latest
     steps:
     - uses: actions/checkout@v3  
     - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
@@ -40,7 +40,7 @@ jobs:
 
   build:
     needs: test
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu:latest
     steps:
     -
       name: Checkout
