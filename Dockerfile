@@ -32,6 +32,12 @@ RUN sed -i "s!/var/www/html!${APACHE_DOCUMENT_ROOT}!g" /etc/apache2/sites-availa
 # Volume para armazenar logs fora do contêiner
 VOLUME ["/var/www/html/storage/logs"]
 
+# Executa os comandos Artisan e ajustes de permissões
+RUN php artisan cache:clear && \
+    php artisan config:cache && \
+    php artisan route:cache && \
+    php artisan key:generate
+
 # Define permissões de escrita para o diretório de armazenamento
 RUN chmod -R 777 storage
 RUN chown -R www-data:www-data storage
@@ -41,9 +47,3 @@ RUN a2enmod rewrite
 
 # Expõe a porta 80
 EXPOSE 80
-
-# Executa os comandos Artisan e ajustes de permissões
-RUN php artisan cache:clear && \
-    php artisan config:cache && \
-    php artisan route:cache && \
-    php artisan key:generate
