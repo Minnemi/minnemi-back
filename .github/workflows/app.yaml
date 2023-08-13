@@ -37,11 +37,6 @@ jobs:
         DB_DATABASE: database/database.sqlite
       run: php artisan test
 
-
-  build:
-    needs: test
-    runs-on: ubuntu:latest
-    steps:
     -
       name: Checkout
       uses: actions/checkout@v3       
