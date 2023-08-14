@@ -2,7 +2,7 @@
 
 $URL=API_URL
 $API_KEY=API_KEY
-FILE_PATH="docker-compose.yml"
+FILE_PATH="./docker-compose.yml"
 
 # Faz a solicitação GET e armazena a resposta em uma variável
 response=$(curl -s -X GET "$URL" -H "X-API-Key: $API_KEY" --insecure)
