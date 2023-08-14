@@ -72,16 +72,11 @@ jobs:
         name: Sleep for 6 seconds
         run: sleep 6s
         shell: bash 
-        
-        env:
-          API_URL: ${{ secrets.API_URL }}
-          API_KEY: ${{ secrets.API_KEY }}  
-
-    - name:  Definir variáveis
+    
+    - name: Set up environment
       run: |
         URL=$API_URL
         API_KEY=$API_KEY
-    
     - 
       name: Executar Script
       run: |
