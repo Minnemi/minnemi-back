@@ -1,14 +1,11 @@
 version: '3'
-
 services:
   minnemi-backend:
-    build: .
-    ports:
-      - "8080:80"
+
+    image: m1nnemi/back:latest
     volumes:
-      - .:/var/www/html
-    networks:
-      - stack_network
+      - ./path/to/your/code:/var/www/html
+
     command: composer production-deps-permissions-start-app
 
 networks:
