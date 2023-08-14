@@ -1,33 +1,6 @@
 version: '3'
-
 services:
   minnemi-backend:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "8080:80"
+    image: m1nnemi/back:latest
     volumes:
-      - .:/var/www/html
-    depends_on:
-      - mysql
-    networks:
-      - stack_network
-
-  mysql:
-    image: mysql:latest
-    ports:
-      - "3306:3306"
-    environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
-      MYSQL_DATABASE: ${DB_DATABASE}
-    volumes:
-      - mysql_data:/var/lib/mysql
-    networks:
-      - stack_network
-
-networks:
-  stack_network:
-
-volumes:
-  mysql_data:
+      - ./path/to/your/code:/var/www/html
