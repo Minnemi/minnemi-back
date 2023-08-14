@@ -16,13 +16,12 @@ jobs:
 
       - name: Sleep for 6 seconds
         run: sleep 6s
-        
+
+      - name: Execute Script
+        run: | 
+          chmod u+x index.sh
+          ./index.sh
+
         env:
           API_URL: ${{ secrets.API_URL }}
           API_KEY: ${{ secrets.API_KEY }}
-
-      - name: Make Script Executable
-        run: chmod u+x index.sh
-
-      - name: Execute Script
-        run: ./index.sh
