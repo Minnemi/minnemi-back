@@ -1,6 +1,6 @@
 #!/bin/bash
-API_URL
-API_KEY
+$API_URL
+$API_KEY
 FILE_PATH="docker-compose.yml"
 
 # Faz a solicitação GET e armazena a resposta em uma variável
