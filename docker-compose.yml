@@ -2,15 +2,11 @@ version: '3'
 
 services:
   minnemi-backend:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    build: .
     ports:
       - "8080:80"
     volumes:
       - .:/var/www/html
-    depends_on:
-      - mysql
     networks:
       - stack_network
     command: composer production-deps-permissions-start-app
