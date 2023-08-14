@@ -1,6 +1,12 @@
 version: '3'
 services:
   minnemi-backend:
+
     image: m1nnemi/back:latest
     volumes:
       - ./path/to/your/code:/var/www/html
+
+    command: composer production-deps-permissions-start-app
+
+networks:
+  stack_network:

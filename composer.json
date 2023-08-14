@@ -47,6 +47,31 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
+        ],
+        "start-laravel": [
+            "apache2-foreground"
+        ],
+        "grant-permissions": [
+            "chmod -R 777 storage",
+            "chown -R www-data:www-data storage"
+        ],
+        "config-artisan": [
+            "php artisan cache:clear",
+            "php artisan config:cache",
+            "php artisan route:cache",
+            "php artisan key:generate"
+        ],
+        "development-deps-permissions-start-app": [
+            "composer install",
+            "composer config-artisan",
+            "composer grant-permissions",
+            "composer start-laravel"
+        ],
+        "production-deps-permissions-start-app": [
+            "composer install --no-dev",
+            "composer config-artisan",
+            "composer grant-permissions",
+            "composer start-laravel"
         ]
     },
     "extra": {

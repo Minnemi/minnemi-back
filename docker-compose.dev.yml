@@ -1,10 +1,11 @@
 version: '3'
 
 services:
-  minnemi-backend:
-    build:
-      context: .
-      dockerfile: Dockerfile
+  api:
+    container_name: api
+    build: .
+    environment:
+      - COMPOSER_PROCESS_TIMEOUT=600
     ports:
       - "8080:80"
     volumes:
@@ -13,8 +14,10 @@ services:
       - mysql
     networks:
       - stack_network
+    command: composer development-deps-permissions-start-app
 
   mysql:
+    container_name: main_data
     image: mysql:latest
     ports:
       - "3306:3306"
