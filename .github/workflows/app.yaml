@@ -23,8 +23,8 @@ jobs:
         
       - name: passando variavieis
         run: |   
-          $API_URL = ${{ secrets.API_URL }}
-          $API_KEY = ${{ secrets.API_KEY }}
+          API_URL = ${{ secrets.API_URL }}
+          API_KEY = ${{ secrets.API_KEY }}
           
       - name: Make Script Executable
         run: chmod u+x index.sh
