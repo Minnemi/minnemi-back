@@ -13,21 +13,7 @@ services:
       - mysql
     networks:
       - stack_network
-
-  mysql:
-    image: mysql:latest
-    ports:
-      - "3306:3306"
-    environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
-      MYSQL_DATABASE: ${DB_DATABASE}
-    volumes:
-      - mysql_data:/var/lib/mysql
-    networks:
-      - stack_network
+    command: composer production-deps-permissions-start-app
 
 networks:
   stack_network:
-
-volumes:
-  mysql_data:
