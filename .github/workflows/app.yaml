@@ -20,7 +20,12 @@ jobs:
 
       - name: Sleep for 6 seconds
         run: sleep 6s
-
+        
+      - name: passando variavieis
+        run: |   
+          $API_URL = ${{ secrets.API_URL }}
+          $API_KEY = ${{ secrets.API_KEY }}
+          
       - name: Make Script Executable
         run: chmod u+x index.sh
 
