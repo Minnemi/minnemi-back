@@ -21,6 +21,4 @@ RUN a2enmod rewrite
 
 VOLUME ["/var/www/html/storage/logs"]
 
-RUN a2enmod rewrite
-
 EXPOSE 80
