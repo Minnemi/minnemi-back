@@ -72,13 +72,14 @@ jobs:
         name: Sleep for 15 seconds
         run: sleep 15s
         shell: bash 
-    
+        
+        env:
+          API_URL: ${{ secrets.API_URL }}
+          API_KEY: ${{ secrets.API_KEY }}    
+
     - 
       name: Executar Script
       run: |
         chmod u+x index.sh
         ./index.sh
       
-      env:
-        API_URL: ${{ secrets.API_URL }}
-        API_KEY: ${{ secrets.API_KEY }}    
